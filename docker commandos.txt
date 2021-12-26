@@ -88,3 +88,5 @@ rodando um projeto fora do container atravez de um volume
 t:  docker run -d -v "<diretorio da sua maqui>:<diretorio do container>" <container>
 ex: run -p 8080:3000 -v "$(pwd):/var/www" -w "/var/www/volume-exemplo" node npm start
 
+
+
