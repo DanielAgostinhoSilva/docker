@@ -1,0 +1,90 @@
+docker commandos
+## Comandos básicos com containers
+mostra a version do docker
+t:  docker version
+
+hello world com docker
+t:  docker run hello-world
+
+listar os container ativo
+t:  docker ps
+
+listar os container parados
+t:  docker ps -a
+
+executar um container ubuntu
+t:  docker run ubuntu
+
+atrelar um terminal ubuntu ao terminal da maquina
+t:  docker run -it ubuntu
+
+para encerrar um container aperte "control + d"
+
+startar um container parado
+t:  docker start <id do container>
+
+startar um container com um terminal interativo
+t:  docker start -a -i <id do container>
+
+
+## Layered File System
+
+como remover um container parado
+t:  docker rm <id do container>
+
+compo limpar todos os container inativos
+t:  docker container prune
+
+como mostrar todas as imagens
+t:  docker images
+
+como remover uma imagem
+t: docker rmi <nome da imagem>
+
+
+## Praticando com o docker run
+
+como executar um container sem travar o terminal
+t: docker run -d <nome do container>
+
+como parar um container sem espera os default 10 segundos
+t:  docker stop -t <tempo em segundos> <id do container>
+
+como linkar um portar do container com uma porta externa
+T:  docker run -d -P  dockersamples/static-site
+
+como verificar a porta de container
+t:  docker port <id do container>
+
+como executar um container com porta dinamica e um apelido
+t: docker run -d -P --name meu-site dockersamples/static-site
+
+como executar um container com uma porta expecifica
+t: docker run -d -p <porta externa>:<porta do container> dockersamples/static-site
+
+como pssar parametros para uma variavel de ambiente de um container
+t:  docker run -d -P -e <nome da variavel>="valor da variavel" <nome da imagem>
+ex: docker run -d -P -e AUTHOR="Daniel A" dockersamples/static-site
+
+como exibir uma lista de container so mostrando os id
+t:  docker ps -q
+
+como para todos os container 
+t: docker stop $(docker ps -q)
+
+
+## Salvando dados com volumes
+
+como criar um volume 
+t:  docker run -v "<caminha da pasta>" <imagem>
+ex: docker run -v "/var/www" ubuntu
+
+como especionar um container
+t: docker inspect <id do container>
+
+##  Rodando código em um container
+
+rodando um projeto fora do container atravez de um volume
+t:  docker run -d -v "<diretorio da sua maqui>:<diretorio do container>" <container>
+ex: run -p 8080:3000 -v "$(pwd):/var/www" -w "/var/www/volume-exemplo" node npm start
+
